@@ -1,5 +1,13 @@
 @import './base.css';
 
+.body-class{
+  background-color: black;
+  color: rgba(255, 255, 255, 0.829);
+}
+
+
+/* default this vue gave me */
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
