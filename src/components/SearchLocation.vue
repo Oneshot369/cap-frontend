@@ -12,7 +12,7 @@ const errormsg : Ref<String | null> = ref("")
 
 function sendRequest() {
   axios
-    .get(`http://localhost:8080/api/v1/weather/getWeather?lat=${lat.value}&lon=${lon.value}`)
+    .get(`http://testbackend-env.eba-sqc4mqhu.us-east-2.elasticbeanstalk.com:8080/api/v1/weather/getWeather?lat=${lat.value}&lon=${lon.value}`)
     .then((response) => {
       weatherData.value = response.data
       console.log(`Value from response of ${lat.value}, ${lon.value}`, response.data)
@@ -21,7 +21,7 @@ function sendRequest() {
 function sendRequestWithName() {
   if(location.value != ""){
     axios
-    .get(`http://localhost:8080/api/v1/weather/getWeatherFromName?locationName=${location.value}`)
+    .get(`http://testbackend-env.eba-sqc4mqhu.us-east-2.elasticbeanstalk.com:8080/api/v1/weather/getWeatherFromName?locationName=${location.value}`)
     .then((response) => {
       let city = response.data[0]
       console.log("Geolocation result", response.data)
@@ -44,12 +44,12 @@ function sendRequestWithName() {
     
     <h1>Lon: {{ lon }}</h1>
 
-    <input v-model="lon" @input="event => {
+    <input class="form-control" v-model="lon" @input="event => {
       // @ts-ignore
       lon = event.target?.value
     }" />
     <h1>Lat: {{ lat }}</h1>
-    <input v-model="lat" @input="event => {
+    <input class="form-control" v-model="lat" @input="event => {
       // @ts-ignore
       lat = event.target?.value
     }" />
@@ -59,7 +59,7 @@ function sendRequestWithName() {
     
     <h1>Name of location: {{ location }}</h1>
 
-    <input v-model="location" @input="event => {
+    <input class="form-control" v-model="location" @input="event => {
       // @ts-ignore
       location = event.target?.value
     }" />
