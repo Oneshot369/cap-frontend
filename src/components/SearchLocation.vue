@@ -3,16 +3,18 @@ import { ref, type Ref } from 'vue'
 import axios from 'axios'
 import type { WeatherObject } from '@/stores/weatherObject';
 
+const apiUrl = import.meta.env.VITE_SPRING_API_URL;
 const weatherData = ref({} as WeatherObject)
-
+console.log("URL for backend",apiUrl);
 const lat: Ref<number | null> = ref(33.4484)
 const lon: Ref<number | null> = ref(-112.0741)
 const location: Ref<String | null> = ref("")
 const errormsg : Ref<String | null> = ref("")
 
+
 function sendRequest() {
   axios
-    .get(`http://testbackend-env.eba-sqc4mqhu.us-east-2.elasticbeanstalk.com:8080/api/v1/weather/getWeather?lat=${lat.value}&lon=${lon.value}`)
+    .get(apiUrl + `/api/v1/weather/getWeather?lat=${lat.value}&lon=${lon.value}`)
     .then((response) => {
       weatherData.value = response.data
       console.log(`Value from response of ${lat.value}, ${lon.value}`, response.data)
@@ -21,7 +23,7 @@ function sendRequest() {
 function sendRequestWithName() {
   if(location.value != ""){
     axios
-    .get(`http://testbackend-env.eba-sqc4mqhu.us-east-2.elasticbeanstalk.com:8080/api/v1/weather/getWeatherFromName?locationName=${location.value}`)
+    .get(apiUrl + `/api/v1/weather/getWeatherFromName?locationName=${location.value}`)
     .then((response) => {
       let city = response.data[0]
       console.log("Geolocation result", response.data)
