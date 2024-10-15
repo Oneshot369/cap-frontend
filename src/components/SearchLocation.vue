@@ -71,7 +71,7 @@ function sendRequestWithName() {
     <br>
     <!-- Check if a value is undefined, meaning we have not sent a request yet -->
     <div v-if="weatherData.name == undefined">
-      Send a request, either type in the longitude and latitude, or search you location by name!
+      Send a request, either type in the longitude and latitude, or search your location by name!
     </div>
     <div v-else>
       <h2> Location at {{ weatherData.name }} (or lon: {{ weatherData.coord.lon }}, lat: {{ weatherData.coord.lat }} )</h2>
