@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RequestView from '../views/RequestView.vue'
+import ForecastGraph from '@/components/ForecastGraph.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/test',
       name: 'Test request',
       component: RequestView
+    },
+    {
+      path: '/graph',
+      name: 'Test a graph',
+      component: ForecastGraph
     }
   ]
 })

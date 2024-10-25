@@ -12,6 +12,7 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/test">Test a request</RouterLink>
+        <RouterLink to="/graph">Test a graph</RouterLink>
       </nav>
     </div>
   </header>
@@ -20,9 +21,8 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-.base{
+.base {
   background-color: black;
-  
 }
 header {
   line-height: 1.5;
