@@ -12,7 +12,8 @@ import { Bar } from 'vue-chartjs'
 
 import { ref, type Ref } from 'vue'
 import axios from 'axios'
-import ForecastObject from '../stores/forecastObject.ts'
+import type { ForecastObject } from '../stores/forecastObject.ts'
+import moment from 'moment'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -40,22 +41,24 @@ function sendForecastRequest() {
       console.log(`Current value from our graph: `, weatherData.value)
       var forecastResponse = response.data.data
 
-      var labelList = []
-      var dataList = []
+      var labelList: string[] = []
+      var dataList: number[] = []
 
-      forecastResponse.list.forEach((element) => {
-        labelList.push(element.dt)
+      forecastResponse.list.forEach((element: any) => {
+        let formattedDate = (moment(element.dt_txt)).format('MMM-DD HH:mm:ss')
+        console.log(formattedDate)
+        labelList.push(formattedDate)
         dataList.push(element.main.temp)
       })
 
       var forecast = {
-        labels: labelList,
-        datasets: {
-          label: forecastResponse.city.name,
-          data: dataList,
-          borderColor: '#36A2EB',
-          backgroundColor: '#9BD0F5'
-        }
+        labels: labelList as string[],
+        datasets: [{
+          label: forecastResponse.city.name as string,
+          data: dataList as number[],
+          borderColor: '#36A2EB' as string,
+          backgroundColor: '#9BD0F5'as string
+        }]
       } as ForecastObject
 
       weatherData.value = forecast
