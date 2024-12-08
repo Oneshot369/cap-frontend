@@ -24,8 +24,9 @@ function sendRequestWithName() {
     axios
       .get(apiUrl + `/api/v1/weather/getWeatherFromName?locationName=${location.value}`)
       .then((response) => {
-        let city = response.data[0]
+        let city = response.data.data[0]
         console.log('Geolocation result', response.data)
+        console.log('Geolocation result', city)
         lat.value = city.lat
         lon.value = city.lon
         sendRequest()
