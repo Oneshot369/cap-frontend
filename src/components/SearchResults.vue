@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import type { WeatherObject } from '@/stores/weatherObject';
+
 
 const props = defineProps<{
   searchResults: any;
