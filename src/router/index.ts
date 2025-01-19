@@ -1,7 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RequestView from '../views/RequestView.vue'
+import SearchResults from '@/components/SearchResults.vue'
 import ForecastGraph from '@/components/ForecastGraph.vue'
+import Errors from '@/components/Errors.vue'
+//import { compatProps } from 'vue-chartjs/dist/utils'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,7 +31,18 @@ const router = createRouter({
       path: '/graph',
       name: 'Test a graph',
       component: ForecastGraph
-    }
+    },
+    {
+      path: '/results',
+      name: 'SearchResults',
+      component: SearchResults,
+    },
+    { path: '/404', 
+      name: "Not Found",
+      component: Errors,
+      props: {message: "Page not found", code: 404}
+     },  
+    { path: '/:catchAll(.*)', redirect: '/404' }, 
   ]
 })
 
