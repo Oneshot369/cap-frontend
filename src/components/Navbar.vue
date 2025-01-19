@@ -1,6 +1,8 @@
-<script>
+<!-- eslint-disable vue/multi-word-component-names -->
+<script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 </script>
+
 <template>
 <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
   <div class="container-fluid">

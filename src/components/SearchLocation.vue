@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import SearchResults from './SearchResults.vue'; // Import the SearchResults component
-import { WeatherObject } from '@/stores/weatherObject';
+import type { WeatherObject } from '@/stores/weatherObject';
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL;
 const weatherData = ref<WeatherObject | null>(null);
@@ -70,7 +70,7 @@ function sendRequestWithName() {
         <br />
       </div>
     </div>
-    <div v-if="searchResults.length == 0" class="request">
+    <div v-if="searchResults==null||searchResults.length == 0" class="request">
       Send a request, either type in the longitude and latitude, or search your location by name!
     </div>
 
