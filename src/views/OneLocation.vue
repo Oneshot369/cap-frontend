@@ -110,7 +110,9 @@ function sendForecastRequest() {
       weatherData.value = forecast  
       console.log(response)
       console.log(weatherData.value)
-    })
+    }).catch((error) => {
+        console.error('Error fetching location data', error);
+      });
 }
 
 // Fetch the data before the component is fully mounted
