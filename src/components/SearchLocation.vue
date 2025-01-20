@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import axios from 'axios';
 import SearchResults from './SearchResults.vue'; // Import the SearchResults component
 import type { WeatherObject } from '@/stores/weatherObject';
+import router from '@/router';
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL;
 const weatherData = ref<WeatherObject | null>(null);
@@ -13,16 +14,14 @@ const location = ref<string | null>('');
 const errormsg = ref<string | null>('');
 const searchResults = ref<[] | null>([]);
 
-function sendRequest() {
-  axios
-    .get(`${apiUrl}/api/v1/weather/getWeather?lat=${lat.value}&lon=${lon.value}`)
-    .then((response) => {
-      weatherData.value = response.data.data;
-    })
-    .catch((error) => {
-      console.error('Error fetching weather data', error);
-      errormsg.value = 'Failed to fetch weather data';
-    });
+const oneLocation= ()=> {
+  router.push({
+    path: '/location',
+    query:{
+      lat: lat.value,
+      lon: lon.value
+    }
+  });
 }
 
 function sendRequestWithName() {
@@ -55,7 +54,7 @@ function sendRequestWithName() {
         <input class="form-control" v-model="lat" />
 
         <br /><br />
-        <button @click="sendRequest" class="btn btn-primary">Search by coordinates</button>
+        <button @click="oneLocation" class="btn btn-primary">Search by coordinates</button>
         <br /><br />
       </div>
       <div class="weather-search">

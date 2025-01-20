@@ -19,7 +19,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <RouterLink to="/about">About</RouterLink>
         </li>
         <li class="nav-item">
-            <RouterLink to="/test">Search Weather</RouterLink>
+            <RouterLink to="/search">Search Weather</RouterLink>
             
         </li>
         <li class="nav-item">

@@ -4,6 +4,7 @@ import RequestView from '../views/RequestView.vue'
 import SearchResults from '@/components/SearchResults.vue'
 import ForecastGraph from '@/components/ForecastGraph.vue'
 import Errors from '@/components/Errors.vue'
+import OneLocation from '@/views/OneLocation.vue'
 //import { compatProps } from 'vue-chartjs/dist/utils'
 
 const router = createRouter({
@@ -23,7 +24,7 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/test',
+      path: '/search',
       name: 'Test request',
       component: RequestView
     },
@@ -33,14 +34,20 @@ const router = createRouter({
       component: ForecastGraph
     },
     {
-      path: '/results',
-      name: 'SearchResults',
-      component: SearchResults,
+      path: '/location',
+      name: 'OneLocation',
+      component: OneLocation,
+      
     },
     { path: '/404', 
       name: "Not Found",
       component: Errors,
       props: {message: "Page not found", code: 404}
+     },
+     { path: '/error', 
+      name: "Generic Error",
+      component: Errors,
+      props: {message: "An error occurred", code: 500}
      },  
     { path: '/:catchAll(.*)', redirect: '/404' }, 
   ]

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
 import FooterItem from './components/FooterItem.vue';
 import Navbar from './components/Navbar.vue';
 </script>
@@ -8,11 +7,7 @@ import Navbar from './components/Navbar.vue';
 <template>
   <Navbar/>
   <br>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="Weather App" />
-    </div>
-  </header>
+  
 
   <RouterView />
 

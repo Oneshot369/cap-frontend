@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-
+import router from '@/router';
 
 const props = defineProps<{
   searchResults: any;
 }>();
 console.log(props.searchResults)
+
+const handleClick = (lat: number, lon: number) =>{
+  router.push({
+    path: '/location',
+    query:{
+      lat: lat,
+      lon: lon
+    }
+  });
+}
 </script>
 
 <template>
   <div class="container">
-      <div v-for="item in searchResults" :key="item.lat" class="searches ">
+      <div v-for="item in searchResults" :key="item.lat" class="searches" @click="handleClick(item.lat, item.lon)">
         <h2>Name: {{ item.name }}</h2>
-        <p>Lat/Lon: {{ item.lat }}, {{item.lon }}</p>
+        <p>Lat/Lon: {{ item.lat }}, {{item.lon}}</p>
         <p>Country: {{ item.country }}</p>
         <p>State: {{ item.state }}</p>
       </div>

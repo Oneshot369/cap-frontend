@@ -1,4 +1,13 @@
+<script setup lang="ts">
+import HelloWorld from '../components/HelloWorld.vue';
+</script>
+
 <template>
+  <header>
+    <div class="wrapper">
+      <HelloWorld msg="Weather App" />
+    </div>
+  </header>
   <div class="greeting">
     <h1>This is an about page</h1>
   </div>
