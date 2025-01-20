@@ -75,6 +75,7 @@ const fetchData = async () => {
             angle.value = Number(data.value.wind.deg);
             sendForecastRequest();
     } catch (err: any) {
+        console.log(err)
         errormsg.value = err.message || 'An error occurred.';
 
     } finally {

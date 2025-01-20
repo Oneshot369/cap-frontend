@@ -9,7 +9,7 @@ const weatherData = ref<WeatherObject | null>(null);
 
 const lat = ref<number>(33.4484);
 const lon = ref<number>(-112.0741);
-const location = ref<string | null>('');
+const location = ref<string | null>('Phoenix');
 const errormsg = ref<string | null>('');
 const searchResults = ref<[] | null>([]);
 
