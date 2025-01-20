@@ -107,7 +107,9 @@ function sendForecastRequest() {
           }]
       } as any
 
-      weatherData.value = forecast
+      weatherData.value = forecast  
+      console.log(response)
+      console.log(weatherData.value)
     })
 }
 
