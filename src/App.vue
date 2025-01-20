@@ -14,11 +14,21 @@ import Navbar from './components/Navbar.vue';
   <FooterItem/>
 </template>
 
-<style scoped>
+<style>
 .base {
   background-color: black;
 }
-
+.btn-primary{
+  background-color: #04be42;
+  border: none;
+  color: black;
+  font-weight: bold;
+}
+.btn-primary:hover{
+  background-color: #05aa3c;
+  color: black;
+  font-weight: bold;
+}
 .logo {
   display: block;
   margin: 0 auto 2rem;

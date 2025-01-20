@@ -29,11 +29,6 @@ const router = createRouter({
       component: RequestView
     },
     {
-      path: '/graph',
-      name: 'Test a graph',
-      component: ForecastGraph
-    },
-    {
       path: '/location',
       name: 'OneLocation',
       component: OneLocation,

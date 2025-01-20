@@ -4,7 +4,13 @@
   background-color: black;
   color: rgba(255, 255, 255, 0.829);
 }
-
+.btn-primary{
+  background-color: #04be42;
+  border: none;
+}
+.btn-primary:hover{
+  background-color: #05aa3c;
+}
 h1 {
   font-weight: 500;
   font-size: 1.6rem;
@@ -43,11 +49,6 @@ a,
   padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
 
 @media (min-width: 1024px) {
  

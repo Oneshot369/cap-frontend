@@ -22,9 +22,6 @@ import { RouterLink, RouterView } from 'vue-router'
             <RouterLink to="/search">Search Weather</RouterLink>
             
         </li>
-        <li class="nav-item">
-            <RouterLink to="/graph">Test a graph</RouterLink>
-        </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -43,16 +40,26 @@ a{
     font-weight: 600;
     font-size: large;
     color: black;
+    border-radius: 5px;
+}
+a:hover{
+  border-radius: 5px;
+  background-color: rgb(4, 190, 66);
+  opacity: .5;
 }
 .nav-item{
-    padding-left: 20px;
-    margin: 5px
+    margin-left: 20px;
+    justify-content: space-around;
 }
 img{
     max-width: 50px;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
 nav{
     border-radius: 5px;
-    
+}
+.navbar-nav{
+  justify-content: space-between;
 }
 </style>
