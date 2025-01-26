@@ -21,5 +21,15 @@ export default defineConfig({
   },
   server: {
     port: portNumb
+  },
+  build: {
+    minify: false,
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Disables code splitting
+      },
+    },
+    
   }
 })
