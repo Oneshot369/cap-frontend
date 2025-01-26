@@ -6,6 +6,15 @@ import ForecastGraph from '@/components/ForecastGraph.vue';
 import { Bar } from 'vue-chartjs'
 import type { ForecastObject } from '../stores/forecastObject.ts'
 import moment from 'moment'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+} from 'chart.js'
 
 // Get the current route
 const route = useRoute();
@@ -19,16 +28,7 @@ const lon = route.query.lon || 'Not provided';
 const loading = ref(true);
 const data: any = ref(null);
 const errormsg = ref<null | string>(null);
-const angle = ref<number>(0);
-    import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
-} from 'chart.js'
+
 
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
@@ -73,10 +73,6 @@ const fetchData = async () => {
                 errormsg.value = 'Failed to fetch weather data';
             });
             sendForecastRequest();
-            console.log("test", data.value.wind.deg)
-            console.log("test", data.value.wind.deg)
-            angle.value = Number(data.value.wind.deg);
-            console.log(angle.value)
     } catch (err: any) {
         errormsg.value = err.message || 'An error occurred.';
 
