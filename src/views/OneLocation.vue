@@ -85,6 +85,7 @@ function sendForecastRequest() {
   axios
     .get(apiUrl + `/api/v1/weather/getForecast?lat=${lat}&lon=${lon}`)
     .then((response) => {
+        console.log("HERE")
       var forecastResponse = response.data.data
 
       var labelList: string[] = []
