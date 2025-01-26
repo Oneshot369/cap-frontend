@@ -75,7 +75,6 @@ const fetchData = async () => {
             angle.value = Number(data.value.wind.deg);
             sendForecastRequest();
     } catch (err: any) {
-        console.log(err)
         errormsg.value = err.message || 'An error occurred.';
 
     } finally {
@@ -108,12 +107,8 @@ function sendForecastRequest() {
           }]
       } as any
 
-      weatherData.value = forecast  
-      console.log(response)
-      console.log(weatherData.value)
-    }).catch((error) => {
-        console.error('Error fetching location data', error);
-      });
+      weatherData.value = forecast
+    })
 }
 
 // Fetch the data before the component is fully mounted
