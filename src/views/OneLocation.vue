@@ -17,7 +17,7 @@ const lon = route.query.lon || 'Not provided';
 
 // Reactive state for the component
 const loading = ref(true);
-const data = ref<any>(null);
+const data: any = ref(null);
 const errormsg = ref<null | string>(null);
 const angle = ref<number>(0);
     import {
