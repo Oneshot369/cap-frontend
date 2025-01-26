@@ -65,7 +65,6 @@ const fetchData = async () => {
         axios
             .get(`${apiUrl}/api/v1/weather/getWeather?lat=${lat}&lon=${lon}`)
             .then((response: any) => {
-                console.log("HERE l")
                 data.value = response.data.data;
                 loading.value = false;
             })
@@ -74,7 +73,8 @@ const fetchData = async () => {
                 errormsg.value = 'Failed to fetch weather data';
             });
             sendForecastRequest();
-            console.log(data.value.wind.deg)
+            console.log("test", data.value.wind.deg)
+            console.log("test", data.value.wind.deg)
             angle.value = Number(data.value.wind.deg);
             console.log(angle.value)
     } catch (err: any) {
@@ -137,7 +137,7 @@ onBeforeMount(fetchData);
                     <h3>Pressure: {{ data.main.pressure }} hPa</h3>
                     <h3>Wind Speed: {{ data.wind.speed }} MPH</h3>
                     <h3>&emsp;Gust: {{ data.wind.gust }} MPH</h3>
-                    <h3>&emsp;Direction: {{ data.wind.deg }} °    <img src="../assets/Arrow.png" class="arrow" :style="{transform: 'rotate(' + angle + 'deg)' }"/></h3>
+                    <h3>&emsp;Direction: {{ data.wind.deg }} °    <img src="../assets/Arrow.png" class="arrow" :style="{transform: 'rotate(' + data.wind.deg + 'deg)' }"/></h3>
                 </div>
             </div>
         </div>
