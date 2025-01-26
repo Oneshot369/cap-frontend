@@ -76,9 +76,9 @@ const fetchData = async () => {
                 errormsg.value = 'Failed to fetch weather data';
             });
             console.log("HERE a")
-            angle.value = Number(data.value.wind.deg);
             console.log("HERE b")
             sendForecastRequest();
+            angle.value = Number(data.value.wind.deg);
     } catch (err: any) {
         errormsg.value = err.message || 'An error occurred.';
 

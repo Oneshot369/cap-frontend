@@ -22,13 +22,4 @@ export default defineConfig({
   server: {
     port: portNumb
   },
-  build: {
-    minify: false,  // Disable minification in production
-    sourcemap: true, // Enable source maps in production for debugging
-    rollupOptions: {
-      output: {
-        manualChunks: undefined, // Disable code splitting
-      },
-    },
-  },
 })
