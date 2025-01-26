@@ -5,6 +5,8 @@ import SearchResults from '@/components/SearchResults.vue'
 import ForecastGraph from '@/components/ForecastGraph.vue'
 import Errors from '@/components/Errors.vue'
 import OneLocation from '@/views/OneLocation.vue'
+import LoginVue from '@/views/LoginVue.vue'
+import RegisterVue from '@/views/RegisterVue.vue'
 //import { compatProps } from 'vue-chartjs/dist/utils'
 
 const router = createRouter({
@@ -32,6 +34,18 @@ const router = createRouter({
       path: '/location',
       name: 'OneLocation',
       component: OneLocation,
+      
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: LoginVue,
+      
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: RegisterVue,
       
     },
     { path: '/404', 
