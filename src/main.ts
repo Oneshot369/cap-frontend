@@ -10,6 +10,8 @@ import router from './router'
 
 const app = createApp(App)
 
+app.config.globalProperties.$JWT = null;
+
 app.use(createPinia())
 app.use(router)
 

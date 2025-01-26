@@ -25,7 +25,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <RouterLink to="/graph">Login</RouterLink>
+            <RouterLink to="/login">Login</RouterLink>
         </li>
         
       </ul>
