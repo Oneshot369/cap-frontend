@@ -50,7 +50,6 @@ const apiUrl = import.meta.env.VITE_SPRING_API_URL;
 
 
 const fetchData = async () => {
-    console.log("HERE start")
     if (lat == 'Not provided') {
         router.push({
             path: '/error'
@@ -63,7 +62,6 @@ const fetchData = async () => {
     }
 
     try {
-        console.log("HERE r")
         axios
             .get(`${apiUrl}/api/v1/weather/getWeather?lat=${lat}&lon=${lon}`)
             .then((response: any) => {
@@ -75,10 +73,10 @@ const fetchData = async () => {
                 console.error('Error fetching weather data', error);
                 errormsg.value = 'Failed to fetch weather data';
             });
-            console.log("HERE a")
-            console.log("HERE b")
             sendForecastRequest();
+            console.log(data.value.wind.deg)
             angle.value = Number(data.value.wind.deg);
+            console.log(angle.value)
     } catch (err: any) {
         errormsg.value = err.message || 'An error occurred.';
 
@@ -87,11 +85,9 @@ const fetchData = async () => {
     }
 };
 function sendForecastRequest() {
-    console.log("HERE q")
   axios
     .get(apiUrl + `/api/v1/weather/getForecast?lat=${lat}&lon=${lon}`)
     .then((response) => {
-        console.log("HERE w")
       var forecastResponse = response.data.data
 
       var labelList: string[] = []
