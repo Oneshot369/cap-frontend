@@ -7,6 +7,7 @@ import Errors from '@/components/Errors.vue'
 import OneLocation from '@/views/OneLocation.vue'
 import LoginVue from '@/views/LoginVue.vue'
 import RegisterVue from '@/views/RegisterVue.vue'
+import LogoutView from '@/views/LogoutView.vue'
 //import { compatProps } from 'vue-chartjs/dist/utils'
 
 const router = createRouter({
@@ -46,6 +47,12 @@ const router = createRouter({
       path: '/register',
       name: 'Register',
       component: RegisterVue,
+      
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: LogoutView,
       
     },
     { path: '/404', 
