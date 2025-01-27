@@ -25,13 +25,13 @@ const logout = () => {
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item left-nav">
             <RouterLink to="/">Home</RouterLink>
           </li>
-          <li class="nav-item">
+          <li class="nav-item left-nav">
             <RouterLink to="/about">About</RouterLink>
           </li>
-          <li class="nav-item">
+          <li class="nav-item left-nav">
             <RouterLink to="/search">Search Weather</RouterLink>
           </li>
         </ul>
@@ -86,6 +86,7 @@ a {
   font-size: large;
   color: black;
   border-radius: 5px;
+  padding: 12px 20px;
 }
 a:hover {
   border-radius: 5px;
@@ -106,5 +107,11 @@ nav {
 }
 .navbar-nav {
   justify-content: space-between;
+}
+.left-nav {
+  flex-grow: 4;
+  display: flex;
+  justify-content: center;
+  margin-right: 55px;
 }
 </style>
