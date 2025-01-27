@@ -1,39 +1,37 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
 import router from '@/router'
-import Cookies from 'js-cookie';
+import { JWTcookie } from '@/stores/cookie'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 const email = ref('')
 const password = ref('')
 const errorMsg = ref('')
-const jwt: any = inject('jwt');
 
-const registerLogin = () =>{
-    let loginAttempt = {
-        username: email.value,
-        password: password.value
-    }
-    console.log(loginAttempt);
-    axios
-      .post(`${apiUrl}/api/v1/user/login`, loginAttempt)
-      .then((response) => {
-        if(response.status == 200){
-            jwt.value = response.data.data;
-            errorMsg.value = ''
-            router.push({
-            path: '/'
-            })
-        }
-        else{
-            errorMsg.value = response.data.data
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-        errorMsg.value = 'Internal error'
-      })
+const registerLogin = () => {
+  let loginAttempt = {
+    username: email.value,
+    password: password.value
+  }
+  console.log(loginAttempt)
+  axios
+    .post(`${apiUrl}/api/v1/user/login`, loginAttempt)
+    .then((response) => {
+      if (response.status == 200) {
+        JWTcookie.setCookie(response.data.data)
+        errorMsg.value = ''
+        router.push({
+          path: '/'
+        })
+      } else {
+        errorMsg.value = response.data.data
+      }
+    })
+    .catch((error) => {
+      console.error(error)
+      errorMsg.value = 'Internal error'
+    })
 }
 </script>
 
@@ -41,27 +39,25 @@ const registerLogin = () =>{
   <h1 class="greeting">Login</h1>
   <div class="forml">
     <form @submit.prevent="registerLogin">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input
-        type="text"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        v-model="email"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" v-model="password"/>
-    </div>
-    <p v-if="errorMsg">Error: {{ errorMsg }}</p>
-    <button submit class="btn btn-primary">Submit</button>
-    <p>Don't have an account? Click<a href="./register">HERE</a></p>
-  </form>
-    
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          v-model="email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" v-model="password" />
+      </div>
+      <p v-if="errorMsg">Error: {{ errorMsg }}</p>
+      <button submit class="btn btn-primary">Submit</button>
+      <p>Don't have an account? Click<a href="./register">HERE</a></p>
+    </form>
   </div>
-  
 </template>
 
 <style scoped>
@@ -79,6 +75,6 @@ form {
 }
 
 button {
-  align-self: flex-start; 
+  align-self: flex-start;
 }
 </style>
