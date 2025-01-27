@@ -3,7 +3,6 @@ import { ref, onBeforeMount, type Ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 import ForecastGraph from '@/components/ForecastGraph.vue';
-import { Bar } from 'vue-chartjs'
 import type { ForecastObject } from '../stores/forecastObject.ts'
 import moment from 'moment'
 import {
