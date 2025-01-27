@@ -3,10 +3,10 @@ import { computed, inject, ref } from 'vue'
 import axios from 'axios'
 import router from '@/router'
 import Cookies from 'js-cookie'
-import jwt from '@/stores/jwt'
+import { JWTcookie } from '@/stores/cookie'
 
 const logout = () => {
-  jwt.clearJWT
+  JWTcookie.removeCookie()
   router.push("/login");
 }
 </script>
