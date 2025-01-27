@@ -9,11 +9,8 @@ export const JWTcookie = reactive({
     Cookies.set(key, value, { expires: 10, path: '' })
     this.cookie = value
   },
-  getCookie() {
-    return Cookies.get(key)
-  },
   removeCookie() {
-    this.cookie = ''
+    this.cookie = undefined
     Cookies.remove(key)
   }
 })
