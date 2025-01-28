@@ -3,9 +3,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { JWTcookie } from '@/stores/cookie'
 
-const logout = () => {
-  JWTcookie.removeCookie()
-}
 </script>
 
 <template>
@@ -71,7 +68,7 @@ const logout = () => {
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <button @click="logout">Logout</button>
+            <RouterLink to="/logout">Logout</RouterLink>
           </li>
         </ul>
       </div>
