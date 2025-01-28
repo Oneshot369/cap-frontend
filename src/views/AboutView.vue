@@ -20,11 +20,15 @@ import HelloWorld from '../components/HelloWorld.vue';
   </div>
 </template>
 
-<style>
+<style scoped>
 .about-text{
   max-width: 40rem;
 }
 img{
   margin-left: 40px; 
+}
+.container{
+  display: flex;
+  justify-content: space-evenly;
 }
 </style>
