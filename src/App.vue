@@ -2,7 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import FooterItem from './components/FooterItem.vue'
 import Navbar from './components/Navbar.vue'
-import { JWTcookie } from './stores/cookie'
 </script>
 
 <template>
@@ -12,7 +11,6 @@ import { JWTcookie } from './stores/cookie'
   <RouterView />
 
   <FooterItem />
-  <p>Your cookie: {{ JWTcookie.cookie }}</p>
 </template>
 
 <style>

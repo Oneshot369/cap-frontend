@@ -11,5 +11,6 @@ export const JWTcookie = reactive({
   },
   removeCookie() {
     Cookies.remove(key)
-    this.cookie = undefined}
-});
+    this.cookie = undefined
+  }
+})

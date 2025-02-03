@@ -2,7 +2,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { JWTcookie } from '@/stores/cookie'
-
 </script>
 
 <template>
@@ -64,6 +63,9 @@ import { JWTcookie } from '@/stores/cookie'
           </li>
           <li class="nav-item">
             <RouterLink to="/search">Search Weather</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink to="/user/saved">Saved Locations</RouterLink>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

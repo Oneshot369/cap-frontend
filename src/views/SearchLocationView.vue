@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
-import SearchResults from './SearchResults.vue' // Import the SearchResults component
+import SearchResults from '@/components/SearchResults.vue' // Import the SearchResults component
 import type { WeatherObject } from '@/stores/weatherObject'
 import router from '@/router'
 
@@ -119,7 +119,7 @@ function sendRequestWithName() {
 .request {
   text-align: center;
 }
-.lon-header{
+.lon-header {
   padding-top: 5px;
 }
 </style>
