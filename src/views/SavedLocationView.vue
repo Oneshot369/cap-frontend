@@ -54,11 +54,8 @@ const getLocations = () => {
 //this makes sure the user is logged in and throws them to the error page if they not logged in.
 onBeforeMount(() => {
   if (JWTcookie.cookie == undefined) {
-    Error.code = 403
-    Error.msg =
-      'Forbidden. Cannot access this page if not logged in. Please log in or create an account.'
     router.push({
-      path: '/error'
+      path: '/login'
     })
   }
   //then preform the API call to get the saved locations

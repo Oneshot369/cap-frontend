@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import axios from 'axios'
 import router from '@/router'
+import { JWTcookie } from '@/stores/cookie'
+import { Error } from '@/stores/error'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
@@ -52,6 +54,16 @@ const registerSubmit = () => {
       registerError.value = 'Internal Error occurred. Please try again at another time.'
     })
 }
+//this makes sure the user is NOT logged in and throws them to the error page if they are.
+onBeforeMount(() => {
+  if (JWTcookie.cookie != undefined) {
+    Error.code = 403
+    Error.msg = 'Forbidden. Cannot access this page if you are logged in. Please log out.'
+    router.push({
+      path: '/error'
+    })
+  }
+})
 </script>
 
 <template>
