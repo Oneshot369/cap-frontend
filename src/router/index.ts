@@ -7,6 +7,7 @@ import LoginVue from '@/views/LoginVue.vue'
 import RegisterVue from '@/views/RegisterVue.vue'
 import LogoutView from '@/views/LogoutView.vue'
 import SavedLocations from '@/views/SavedLocationView.vue'
+import AboutView from '@/views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,7 +20,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'About',
-      component: HomeView
+      component: AboutView
     },
     {
       path: '/search',
