@@ -3,7 +3,7 @@ import { ref, onBeforeMount, type Ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 import ForecastGraph from '@/components/ForecastGraph.vue'
-import type { ForecastObject } from '../stores/forecastObject.ts'
+import type { ForecastObject } from '../stores/interface/forecastObject.js'
 import moment from 'moment'
 import {
   Chart as ChartJS,
@@ -48,19 +48,21 @@ const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
 const saveLocationToAccount = async () => {
   axios
-    .post(`${apiUrl}/api/v1/user/saveLocation`,
-        {
-          //we don't really need to have this id, but i makes more sense to me to have it
-          id: '0',
-          lon: lon,
-          lat: lat,
-          name: data.value.name
-        },
-        {
-            headers: {
-            Authorization: `Bearer ${JWTcookie.cookie}`
-            }
-        })
+    .post(
+      `${apiUrl}/api/v1/user/saveLocation`,
+      {
+        //we don't really need to have this id, but i makes more sense to me to have it
+        id: '0',
+        lon: lon,
+        lat: lat,
+        name: data.value.name
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JWTcookie.cookie}`
+        }
+      }
+    )
     .then((response: any) => {
       data.value = response.data.data
       loading.value = false

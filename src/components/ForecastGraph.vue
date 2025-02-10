@@ -11,7 +11,7 @@ import {
   PointElement
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import type { ForecastObject } from '../stores/forecastObject.ts'
+import type { ForecastObject } from '../stores/interface/forecastObject.js'
 
 defineProps<{
   readonly weather: ForecastObject

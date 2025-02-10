@@ -1,4 +1,4 @@
-import type { ConstraintObject } from './constraint'
+import type { ConstraintObject } from '@/stores/interface/constraint'
 
 /* eslint-disable prefer-const */
 export interface LocationObject {

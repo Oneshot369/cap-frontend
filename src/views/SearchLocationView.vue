@@ -2,11 +2,9 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import SearchResults from '@/components/SearchResults.vue' // Import the SearchResults component
-import type { WeatherObject } from '@/stores/weatherObject'
 import router from '@/router'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
-const weatherData = ref<WeatherObject | null>(null)
 
 const lat = ref<number>(33.4484)
 const lon = ref<number>(-112.0741)

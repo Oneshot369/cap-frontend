@@ -4,7 +4,7 @@ import { onBeforeMount, ref } from 'vue'
 import { Error } from '@/stores/error'
 import router from '@/router'
 import axios from 'axios'
-import type { UserObject } from '@/stores/userObject'
+import type { UserObject } from '@/stores/interface/userObject'
 import SavedLocationsResults from '@/components/SavedLocationsResults.vue'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
@@ -41,17 +41,18 @@ const getLocations = () => {
         Error.code = response.status
         Error.msg = response.data
         router.push({
-          path: '/error'
+          path: `/error`
         })
       }
     })
     .catch((error) => {
       Error.code = error.status
-      Error.msg = error.router.push({
-        path: '/error'
+      Error.msg = error.code
+      router.push({
+        path: `/error`
       })
     })
-    .finally(() =>{
+    .finally(() => {
       loading.value = false
     })
 }
