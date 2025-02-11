@@ -9,12 +9,9 @@ const props = defineProps({
 })
 const route = useRoute()
 
-// Extract query parameters from the route
-const messageQ = route.query.message || 'An error occurred'
-const codeQ = route.query.code || '500'
 //use our error message state if no props are passed from the router
-let ErrorCode = props.code ?? messageQ
-let ErrorMessage = props.message ?? codeQ
+let ErrorCode = props.code ?? Error.code
+let ErrorMessage = props.message ?? Error.msg
 console.log(Error)
 </script>
 

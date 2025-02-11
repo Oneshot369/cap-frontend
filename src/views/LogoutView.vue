@@ -11,14 +11,6 @@ const logout = () => {
   router.push('/login')
 }
 
-//this makes sure the user is logged in and throws them to the error page if they not logged in.
-onBeforeMount(() => {
-  if (JWTcookie.cookie == undefined) {
-    router.push({
-      path: '/login'
-    })
-  }
-})
 </script>
 
 <template>

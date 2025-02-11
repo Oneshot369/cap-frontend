@@ -30,7 +30,7 @@ const handleEditClick = (location: LocationObject) => {
   <div class="container">
     <div
       v-for="item in locationList"
-      :key="item.lat"
+      :key="item.id"
       class="searches"
       @click="handleClick(item.lat, item.lon)"
     >

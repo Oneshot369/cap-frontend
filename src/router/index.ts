@@ -9,6 +9,21 @@ import LogoutView from '@/views/LogoutView.vue'
 import SavedLocations from '@/views/SavedLocationView.vue'
 import AboutView from '@/views/AboutView.vue'
 import EditLocationView from '@/views/EditLocationView.vue'
+import { JWTcookie } from '@/stores/cookie'
+import { Error } from '@/stores/error'
+
+const isLoggedIn = () =>{
+  if (JWTcookie.cookie == undefined) {
+    Error.code = 403;
+    Error.msg = "Forbidden. You do not have the necessary authorization to see this page."
+    return "/error";
+  }
+  return true;
+}
+
+const isAdmin = () =>{
+
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,17 +61,17 @@ const router = createRouter({
     {
       path: '/logout',
       name: 'Logout',
+      beforeEnter: isLoggedIn,
       component: LogoutView
     },
     {
-      path: '/user/saved',
+      path: '/user',
+      beforeEnter: isLoggedIn,
       name: 'Locations',
-      component: SavedLocations
-    },
-    {
-      path: '/user/location',
-      name: 'EditLocation',
-      component: EditLocationView
+      children: [
+        {path: 'saved', component: SavedLocations},
+        {path: 'location', component: EditLocationView}
+      ]
     },
     {
       path: '/404',
@@ -68,5 +83,7 @@ const router = createRouter({
     { path: '/:catchAll(.*)', redirect: '/404' }
   ]
 })
+
+
 
 export default router
