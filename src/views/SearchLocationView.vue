@@ -107,7 +107,7 @@ function sendRequestWithName() {
   </main>
 </template>
 
-<style lang="css">
+<style scoped lang="css">
 .searches {
   justify-content: space-around;
 }

@@ -6,9 +6,87 @@ import { onBeforeMount } from 'vue'
 import { editLocation } from '@/stores/editLocation'
 import { Error } from '@/stores/error'
 import ConstraintItems from '@/components/ConstraintItems.vue'
+import axios from 'axios'
+import type { ConstraintObject } from '@/stores/interface/constraint'
+
+const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
 let location: LocationObject
 let locationLength: number = 0
+let constraint: ConstraintObject = {
+  id: '0',
+  name: 'Name',
+  condition: 'TEMP',
+  val: '10',
+  greaterThan: false
+}
+let editConstraint: ConstraintObject = {
+  id: '0',
+  name: 'Name',
+  condition: 'TEMP',
+  val: '10',
+  greaterThan: false
+}
+
+const pushBack = () => {
+  router.push({
+    path: `/user/saved`
+  })
+}
+
+const addConstraint = () => {
+  axios
+    .post(
+      `${apiUrl}/api/v1/user/saveConstraint`,
+      {
+        id: constraint,
+        name: 'temp constraint',
+        condition: 'TEMP',
+        val: '300',
+        greaterThan: false
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${JWTcookie.cookie}`
+        }
+      }
+    )
+    .then((response: any) => {
+      router.push({
+        path: `/user/saved`
+      })
+    })
+    .catch((error: any) => {
+      console.error('Error fetching weather data', error)
+    })
+}
+
+const deleteLocation = () => {
+  axios
+    .delete(`${apiUrl}/api/v1/user/deleteLocation?id=${location.id}`, {
+      headers: {
+        Authorization: 'Bearer ' + JWTcookie.cookie
+      }
+    })
+    .then((response) => {
+      if (response.status == 200) {
+        pushBack()
+      } else {
+        Error.code = response.status
+        Error.msg = response.data
+        router.push({
+          path: `/error`
+        })
+      }
+    })
+    .catch((error) => {
+      Error.code = error.status
+      Error.msg = error.code
+      router.push({
+        path: `/error`
+      })
+    })
+}
 
 onBeforeMount(() => {
   //if the editLocation value is not there return to the saved locations.
@@ -18,32 +96,44 @@ onBeforeMount(() => {
     locationLength = location.constraints ? location.constraints.length : 0
     console.log(locationLength)
   } else {
-    location = {name: "", id: 0, lon: 0, lat: 0}
+    location = { name: '', id: 0, lon: 0, lat: 0 }
     locationLength = 0
-    Error.code = 403
-    Error.msg = "You attempted to access a resource by URL directly instead of through the correct channels. Please access this via the /user/saved url then select the edit button."
-    router.push({
-      path: `/error`
-    })
+
+    pushBack()
   }
 })
 </script>
 
 <template>
   <div>
+    <button class="btn btn-primary btn-padding" @click="pushBack()">Back</button>
     <div class="greeting">
       <h1 class="green">Edit {{ location.name }}</h1>
 
       <div class="container" v-if="locationLength != 0">
-        <ConstraintItems :constraint-lists="location.constraints"/>
+        <ConstraintItems :constraint-lists="location.constraints" />
       </div>
       <div v-else>
         <p>
           Looks like you have no constraints for this location, create a new one to get started.
         </p>
       </div>
+      <div class="add-constraint">
+        <button class="btn btn-primary" @click="addConstraint()">Add Constraint</button>
+      </div>
+
+      <button class="btn btn-secondary btn-padding" @click="deleteLocation()">
+        Delete Location
+      </button>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.btn-padding {
+  margin-left: 20px;
+}
+.btn-secondary {
+  float: left;
+}
+</style>

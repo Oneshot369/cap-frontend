@@ -66,6 +66,9 @@ const saveLocationToAccount = async () => {
     .then((response: any) => {
       data.value = response.data.data
       loading.value = false
+      router.push({
+          path: `/user/saved`
+        });
     })
     .catch((error: any) => {
       console.error('Error fetching weather data', error)
@@ -210,11 +213,11 @@ h1 {
 }
 .graph {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  width: 90%; /* Adjust width for scaling */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 100rem; /* Optional: limit the max size */
-  margin: 0 auto; /* Center within parent */
+  justify-content: center; 
+  align-items: center; 
+  width: 90%; 
+  height: auto; 
+  max-width: 100rem; 
+  margin: 0 auto; 
 }
 </style>

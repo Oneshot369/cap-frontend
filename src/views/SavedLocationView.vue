@@ -57,6 +57,7 @@ const getLocations = () => {
     })
 }
 
+
 //this makes sure the user is logged in and throws them to the error page if they not logged in.
 onBeforeMount(() => {
   if (JWTcookie.cookie == undefined) {
@@ -88,6 +89,7 @@ onBeforeMount(() => {
       </h3>
     </div>
   </div>
+  
 </template>
 
 <style lang="css" scoped>
