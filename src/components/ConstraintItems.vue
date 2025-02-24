@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <div class="container">
     <div v-for="con in constraintLists" :key="con.id" class="constraint">
-      <p class="label">Constraint: #</p><p class="value">{{ con.id }}</p>
+      <p class="label">Constraint:</p><p class="value">{{ con.name }}</p>
       <p class="label">For:</p><p class="value">{{ con.condition }}</p>
       <p class="label">Value:</p><p class="value">{{ con.val }}</p>
       <p class="label">Notify me when</p><p class="value">{{ con.greaterThan ? 'above' : 'below' }} {{ con.val }}</p>

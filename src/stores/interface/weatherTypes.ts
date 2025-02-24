@@ -1,0 +1,11 @@
+export enum WeatherTypes {
+    TEMP = "TEMP",
+    FEELS_LIKE = "FEELS_LIKE",
+    PRESSURE = "PRESSURE",
+    HUMIDITY = "HUMIDITY",
+    VISIBILITY = "VISIBILITY",
+    WIND_SPEED = "WIND_SPEED",
+    WIND_DEG = "WIND_DEG",
+    WIND_GUST = "WIND_GUST"
+}
+  

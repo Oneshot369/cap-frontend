@@ -8,57 +8,31 @@ import { Error } from '@/stores/error'
 import ConstraintItems from '@/components/ConstraintItems.vue'
 import axios from 'axios'
 import type { ConstraintObject } from '@/stores/interface/constraint'
+import { WeatherTypes } from '@/stores/interface/weatherTypes'
+import ConstraintModalAdd from '@/components/ConstraintModalAdd.vue'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
+
+
 let location: LocationObject
 let locationLength: number = 0
-let constraint: ConstraintObject = {
-  id: '0',
-  name: 'Name',
-  condition: 'TEMP',
-  val: '10',
-  greaterThan: false
-}
+
 let editConstraint: ConstraintObject = {
   id: '0',
   name: 'Name',
-  condition: 'TEMP',
+  condition: WeatherTypes.TEMP,
   val: '10',
   greaterThan: false
 }
 
+const addedItem = (constraint: ConstraintObject) =>{
+  location.constraints?.push(constraint);
+}
 const pushBack = () => {
   router.push({
     path: `/user/saved`
   })
-}
-
-const addConstraint = () => {
-  axios
-    .post(
-      `${apiUrl}/api/v1/user/saveConstraint`,
-      {
-        id: constraint,
-        name: 'temp constraint',
-        condition: 'TEMP',
-        val: '300',
-        greaterThan: false
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${JWTcookie.cookie}`
-        }
-      }
-    )
-    .then((response: any) => {
-      router.push({
-        path: `/user/saved`
-      })
-    })
-    .catch((error: any) => {
-      console.error('Error fetching weather data', error)
-    })
 }
 
 const deleteLocation = () => {
@@ -94,7 +68,6 @@ onBeforeMount(() => {
     location = editLocation.value
     //if its undefined / null its 0. if not set the real length
     locationLength = location.constraints ? location.constraints.length : 0
-    console.log(locationLength)
   } else {
     location = { name: '', id: 0, lon: 0, lat: 0 }
     locationLength = 0
@@ -108,7 +81,7 @@ onBeforeMount(() => {
   <div>
     <button class="btn btn-primary btn-padding" @click="pushBack()">Back</button>
     <div class="greeting">
-      <h1 class="green">Edit {{ location.name }}</h1>
+      <h1 class="green">Constraints for {{ location.name }}</h1>
 
       <div class="container" v-if="locationLength != 0">
         <ConstraintItems :constraint-lists="location.constraints" />
@@ -119,7 +92,7 @@ onBeforeMount(() => {
         </p>
       </div>
       <div class="add-constraint">
-        <button class="btn btn-primary" @click="addConstraint()">Add Constraint</button>
+        <ConstraintModalAdd :id="location.id.toString()" @add-item="addedItem"></ConstraintModalAdd>
       </div>
 
       <button class="btn btn-secondary btn-padding" @click="deleteLocation()">

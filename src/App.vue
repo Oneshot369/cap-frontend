@@ -21,24 +21,23 @@ import Navbar from './components/Navbar.vue'
   background-color: #04be42;
   border: none;
   color: black;
-  font-weight: bold;
+  
 }
 .btn-secondary {
   background-color: #be3904;
   border: none;
   color: black;
-  font-weight: bold;
+  
 }
 .btn-secondary:hover {
   background-color: #be4c1e;
   border: none;
   color: black;
-  font-weight: bold;
 }
 .btn-primary:hover {
   background-color: #05aa3c;
   color: black;
-  font-weight: bold;
+
 }
 .logo {
   display: block;
