@@ -15,12 +15,13 @@ const props = defineProps({
 })
 const emit = defineEmits(['add-item'])
 
-let showModal = ref(false)
+let toggle = ref(false);
+let showModal = ref(false);
 
 let constraint = ref({
   id: props.id,
   name: '',
-  condition: '',
+  condition: 'TEMP',
   val: '',
   greaterThan: false
 })
@@ -88,11 +89,14 @@ const addConstraint = () => {
                 v-model="constraint.name"
               />
               <label for="exampleInputEmail1" class="form-label">For:</label>
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select class="form-select" aria-label="Default select example" v-model="constraint.condition">
+                <option @value="WeatherTypes.TEMP">{{ WeatherTypes.TEMP }}</option>
+                <option @value="WeatherTypes.FEELS_LIKE">{{ WeatherTypes.FEELS_LIKE }}</option>
+                <option @value="WeatherTypes.HUMIDITY">{{ WeatherTypes.HUMIDITY }}</option>
+                <option @value="WeatherTypes.PRESSURE">{{ WeatherTypes.PRESSURE }}</option>
+                <option @value="WeatherTypes.WIND_SPEED">{{ WeatherTypes.WIND_SPEED }}</option>
+                <option @value="WeatherTypes.WIND_GUST">{{ WeatherTypes.WIND_GUST }}</option>
+                <option @value="WeatherTypes.VISIBILITY">{{ WeatherTypes.VISIBILITY }}</option>
               </select>
               <label for="exampleInputEmail1" class="form-label">Value:</label>
               <input
@@ -104,12 +108,25 @@ const addConstraint = () => {
               />
               <label for="exampleInputEmail1" class="form-label">Notify me when:</label>
               <input
-                type="text"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                v-model="constraint.val"
-              />
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault1"
+          value="true"
+          checked
+          v-model="toggle"
+        />
+        <label class="form-check-label" for="flexRadioDefault1"> Search by Name</label>
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault1"
+          value="false"
+          checked
+          v-model="toggle"
+        />
+        <label class="form-check-label" for="flexRadioDefault1"> Search by Name</label>
             </form>
           </div>
           <div class="modal-footer">

@@ -81,7 +81,7 @@ onBeforeMount(() => {
   <div>
     <button class="btn btn-primary btn-padding" @click="pushBack()">Back</button>
     <div class="greeting">
-      <h1 class="green">Constraints for {{ location.name }}</h1>
+      <h1 class="green">Alerts for {{ location.name }}</h1>
 
       <div class="container" v-if="locationLength != 0">
         <ConstraintItems :constraint-lists="location.constraints" />
