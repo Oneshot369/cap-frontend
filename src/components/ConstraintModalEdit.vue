@@ -1,65 +1,77 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, type Ref, defineProps } from 'vue'
 import axios from 'axios'
+import { cloneDeep } from 'lodash';
 import type { ConstraintObject } from '@/stores/interface/constraint'
 import { WeatherTypes } from '@/stores/interface/weatherTypes'
 import { JWTcookie } from '@/stores/cookie'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
-const props = defineProps({
-  locationId: {
-    type: String,
-    required: true
-  }
-})
-const emit = defineEmits(['add-item'])
 
-let toggle = ref(false)
-let showModal = ref(false)
+//emits a clear item, and and edit item function
+const emit = defineEmits(['edit-item', 'clear-item', 'del-item'])
+
+//above / below value
+let toggle = ref(false);
+//show modal
+let showModal = ref(false);
+//errors
 let nameError = ref(false);
 let valError = ref(false);
 
-let constraint = ref({
-  id: props.locationId,
+//a temporary reference for the modal instance
+let tempConstraint = ref<ConstraintObject>({
+  id: '',
   name: '',
-  condition: 'TEMP',
+  condition: WeatherTypes.TEMP,
   val: '',
   greaterThan: false
-})
+});
 
 const closeModal = () => {
-  showModal.value = false
+  showModal.value = false;
+  //unlock scrolling
+  document.body.style.overflow = '';
+}
+const openModal = (con: ConstraintObject): void => {
+  //lock scrolling
+  document.body.style.overflow = 'hidden';
+  showModal.value = true;
+  //clone this reference to prevent it updating the list when we dont want it too. 
+  tempConstraint.value = cloneDeep(con);
+
+  toggle.value = tempConstraint.value.greaterThan;
 }
 
 const checkVal = () => {
   let didPass = true;
   nameError.value = false;
   valError.value = false;
-  if (constraint.value.name == '') {
+  if (tempConstraint.value.name == '') {
     nameError.value = true;
     didPass = false
   }
-  if (constraint.value.val == '') {
+  if (tempConstraint.value.val == '') {
     valError.value = true;
     didPass = false
   }
   return didPass;
 }
 
-const addConstraint = () => {
+const editConstraint = () => {
   //set our toggle value to our constraint.
-  constraint.value.greaterThan = toggle.value
+  tempConstraint.value.greaterThan = toggle.value
   if (checkVal()) {
     axios
-      .post(
-        `${apiUrl}/api/v1/user/saveConstraint`,
+      .put(
+        `${apiUrl}/api/v1/user/updateConstraint`,
         {
-          id: constraint.value.id,
-          name: constraint.value.name,
-          condition: constraint.value.condition,
-          val: constraint.value.val,
-          greaterThan: constraint.value.greaterThan
+          id: tempConstraint.value.id,
+          name: tempConstraint.value.name,
+          condition: tempConstraint.value.condition,
+          val: tempConstraint.value.val,
+          greaterThan: tempConstraint.value.greaterThan
         },
         {
           headers: {
@@ -69,7 +81,7 @@ const addConstraint = () => {
       )
       .then((response) => {
         if (response.status == 200) {
-          emit('add-item', constraint)
+          emit('edit-item', tempConstraint.value)
         }
         closeModal()
       })
@@ -78,13 +90,34 @@ const addConstraint = () => {
       })
   }
 }
+
+const deleteConstraint = () =>{
+  axios
+      .delete(`${apiUrl}/api/v1/user/deleteConstraint?id=${tempConstraint.value.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${JWTcookie.cookie}`
+          }
+        }
+      )
+      .then((response) => {
+        if (response.status == 200) {
+          emit('del-item', tempConstraint.value.id);
+        }
+        closeModal()
+      })
+      .catch((error: any) => {
+        console.error('Error fetching weather data', error)
+      })
+}
+
+defineExpose({
+openModal
+})
 </script>
 
 <template>
   <div>
-    <!-- Trigger Button -->
-    <button class="btn btn-primary" @click="showModal = true">Create Alert</button>
-
     <!-- Modal -->
     <div
       class="modal fade"
@@ -96,8 +129,9 @@ const addConstraint = () => {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-secondary">
           <div class="modal-header">
-            <h5 class="modal-title">Create a new Alert</h5>
-            <button type="button" class="btn-close" @click="closeModal"></button>
+            <h5 class="modal-title">Edit Alert</h5>
+            <button type="button" class="btn-secondary btn-delete" @click="deleteConstraint">Delete</button>
+            
           </div>
           <div class="modal-body">
             <form>
@@ -107,7 +141,7 @@ const addConstraint = () => {
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                v-model="constraint.name"
+                v-model="tempConstraint.name"
               />
               <small id="emailHelp" class="form-text text-error" :style="{ display: nameError ? 'block' : 'none' }">Cannot be blank</small>
 
@@ -117,7 +151,7 @@ const addConstraint = () => {
               <select
                 class="form-select"
                 aria-label="Default select example"
-                v-model="constraint.condition"
+                v-model="tempConstraint.condition"
               >
                 <option @value="WeatherTypes.TEMP">{{ WeatherTypes.TEMP }}</option>
                 <option @value="WeatherTypes.FEELS_LIKE">{{ WeatherTypes.FEELS_LIKE }}</option>
@@ -134,7 +168,7 @@ const addConstraint = () => {
                 class="form-control"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
-                v-model="constraint.val"
+                v-model="tempConstraint.val"
               />
               <small id="emailHelp" class="form-text text-error" :style="{ display: valError ? 'block' : 'none' }">Cannot be blank</small>
               <br>
@@ -162,7 +196,7 @@ const addConstraint = () => {
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" @click="addConstraint">Send request</button>
+            <button class="btn btn-primary" @click="editConstraint">Send request</button>
             <button class="btn btn-secondary" @click="closeModal">Close</button>
           </div>
         </div>
@@ -187,6 +221,14 @@ const addConstraint = () => {
 .text-error{
   float: left;
   color: red;
+}
+
+.btn-delete{
+  /* This is copied from bootstraps .modal-header .btn=-close class. I just repurposed it for the delete */
+  margin : calc(-0.5* var(--bs-modal-header-padding-y)) calc(-0.5* var(--bs-modal-header-padding-x)) calc(-0.5* var(--bs-modal-header-padding-y)) auto;
+
+  border-radius: 5px;
+  padding: 6px 12px 6px 12px;
 }
 
 </style>

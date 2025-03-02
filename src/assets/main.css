@@ -1,7 +1,8 @@
 @import './base.css';
 
 .body-class{
-  background-color: black;
+  /* background: linear-gradient(180deg, #0D0D0D 0%, #1a1919 50%, #0D0D0D 200%); */
+  background: black;
   color: rgba(255, 255, 255, 0.829);
 }
 .btn-primary{

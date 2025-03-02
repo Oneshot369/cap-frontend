@@ -7,27 +7,53 @@ import { editLocation } from '@/stores/editLocation'
 import { Error } from '@/stores/error'
 import ConstraintItems from '@/components/ConstraintItems.vue'
 import axios from 'axios'
-import type { ConstraintObject } from '@/stores/interface/constraint'
-import { WeatherTypes } from '@/stores/interface/weatherTypes'
 import ConstraintModalAdd from '@/components/ConstraintModalAdd.vue'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
 
 
-let location: LocationObject
-let locationLength: number = 0
+let location: LocationObject;
+let locationLength: number = 0;
 
-let editConstraint: ConstraintObject = {
-  id: '0',
-  name: 'Name',
-  condition: WeatherTypes.TEMP,
-  val: '10',
-  greaterThan: false
-}
 
-const addedItem = (constraint: ConstraintObject) =>{
-  location.constraints?.push(constraint);
+
+const addedItem = (constraint: any) =>{
+  axios
+    .get(`${apiUrl}/api/v1/user/getLocation`, {
+      headers: {
+        Authorization: 'Bearer ' + JWTcookie.cookie
+      }
+    })
+    .then((response) => {
+      if (response.status == 200) {
+        let locations = response.data.data.locations
+        let didChange = false;
+        locations.forEach((loc: any) => {
+          if(loc.id == location.id){
+            location.constraints = loc.constraints
+            didChange = true;
+          }
+        });
+        console.log("Added", location);
+        if(!didChange){
+          pushBack();
+        }
+      } else {
+        Error.code = response.status
+        Error.msg = response.data
+        router.push({
+          path: `/error`
+        })
+      }
+    })
+    .catch((error) => {
+      Error.code = error.status
+      Error.msg = error.code
+      router.push({
+        path: `/error`
+      })
+    })
 }
 const pushBack = () => {
   router.push({
@@ -92,7 +118,7 @@ onBeforeMount(() => {
         </p>
       </div>
       <div class="add-constraint">
-        <ConstraintModalAdd :id="location.id.toString()" @add-item="addedItem"></ConstraintModalAdd>
+        <ConstraintModalAdd :locationId="location.id.toString()" @add-item="addedItem"></ConstraintModalAdd>
       </div>
 
       <button class="btn btn-secondary btn-padding" @click="deleteLocation()">
