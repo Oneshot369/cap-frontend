@@ -30,6 +30,14 @@ let constraint = ref({
 
 const closeModal = () => {
   showModal.value = false
+  //clear the add model
+  clearAddConstraint();
+}
+
+const clearAddConstraint = () =>{
+  constraint.value.name = '';
+  constraint.value.val = '';
+  constraint.value.greaterThan = false;
 }
 
 const checkVal = () => {
@@ -69,9 +77,10 @@ const addConstraint = () => {
       )
       .then((response) => {
         if (response.status == 200) {
-          emit('add-item', constraint)
+          emit('add-item', constraint);
         }
-        closeModal()
+        closeModal();
+        
       })
       .catch((error: any) => {
         console.error('Error fetching weather data', error)

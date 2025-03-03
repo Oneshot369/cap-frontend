@@ -2,7 +2,7 @@
 import router from '@/router'
 import { JWTcookie } from '@/stores/cookie'
 import type { LocationObject } from '@/stores/interface/locationObject'
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { editLocation } from '@/stores/editLocation'
 import { Error } from '@/stores/error'
 import ConstraintItems from '@/components/ConstraintItems.vue'
@@ -11,14 +11,17 @@ import ConstraintModalAdd from '@/components/ConstraintModalAdd.vue'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
+let location = ref<LocationObject>({
+  id: 0,
+  lon: 0,
+  lat: 0,
+  name: 'test'
+})
+let locationLength= ref<number>(0)
 
+const childRef = ref<InstanceType<typeof ConstraintItems> | null>(null)
 
-let location: LocationObject;
-let locationLength: number = 0;
-
-
-
-const addedItem = (constraint: any) =>{
+const addedItem = (constraint: any) => {
   axios
     .get(`${apiUrl}/api/v1/user/getLocation`, {
       headers: {
@@ -28,16 +31,22 @@ const addedItem = (constraint: any) =>{
     .then((response) => {
       if (response.status == 200) {
         let locations = response.data.data.locations
-        let didChange = false;
+        let didChange = false
+        console.log('here locations from request', locations)
+        console.log('Current', location)
+        console.log('constraint', constraint)
         locations.forEach((loc: any) => {
-          if(loc.id == location.id){
-            location.constraints = loc.constraints
+          if (loc.id == location.value.id) {
+            location.value.constraints = loc.constraints;
             didChange = true;
+            //update child constraints
+            locationLength.value = 1
+            childRef.value?.handleAdd(loc.constraints)
           }
-        });
-        console.log("Added", location);
-        if(!didChange){
-          pushBack();
+        })
+        console.log('Added', location)
+        if (!didChange) {
+          pushBack()
         }
       } else {
         Error.code = response.status
@@ -63,7 +72,7 @@ const pushBack = () => {
 
 const deleteLocation = () => {
   axios
-    .delete(`${apiUrl}/api/v1/user/deleteLocation?id=${location.id}`, {
+    .delete(`${apiUrl}/api/v1/user/deleteLocation?id=${location.value.id}`, {
       headers: {
         Authorization: 'Bearer ' + JWTcookie.cookie
       }
@@ -91,12 +100,12 @@ const deleteLocation = () => {
 onBeforeMount(() => {
   //if the editLocation value is not there return to the saved locations.
   if (editLocation.value) {
-    location = editLocation.value
+    location.value = editLocation.value
     //if its undefined / null its 0. if not set the real length
-    locationLength = location.constraints ? location.constraints.length : 0
+    locationLength.value = location.value.constraints ? location.value.constraints.length : 0
   } else {
-    location = { name: '', id: 0, lon: 0, lat: 0 }
-    locationLength = 0
+    location.value = { name: '', id: 0, lon: 0, lat: 0 }
+    locationLength.value = 0
 
     pushBack()
   }
@@ -110,7 +119,7 @@ onBeforeMount(() => {
       <h1 class="green">Alerts for {{ location.name }}</h1>
 
       <div class="container" v-if="locationLength != 0">
-        <ConstraintItems :constraint-lists="location.constraints" />
+        <ConstraintItems :constraint-lists="location.constraints" ref="childRef" />
       </div>
       <div v-else>
         <p>
@@ -118,7 +127,10 @@ onBeforeMount(() => {
         </p>
       </div>
       <div class="add-constraint">
-        <ConstraintModalAdd :locationId="location.id.toString()" @add-item="addedItem"></ConstraintModalAdd>
+        <ConstraintModalAdd
+          :locationId="location.id.toString()"
+          @add-item="addedItem"
+        ></ConstraintModalAdd>
       </div>
 
       <button class="btn btn-secondary btn-padding" @click="deleteLocation()">

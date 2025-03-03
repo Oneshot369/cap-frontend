@@ -12,5 +12,6 @@
 <style>
 .footer-text{
   text-align: center;
+  clear:both;
 }
 </style>

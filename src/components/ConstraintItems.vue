@@ -28,7 +28,6 @@ const handleEdit = (constraintFromChild: ConstraintObject) =>{
   });
 }
 const handleDelete = (id: string) =>{
-  console.log("del")
   listOfConstraints.value.forEach((con, index) => {
     if(con.id == id){
       listOfConstraints.value.splice(index, 1);
@@ -36,11 +35,17 @@ const handleDelete = (id: string) =>{
   });
 }
 
+const handleAdd = (constraintFromChild: ConstraintObject[]) =>{
+  listOfConstraints.value = constraintFromChild;
+}
+
 const switchEdit = (con: ConstraintObject) =>{
   editConstraint.value = con
   childRef.value?.openModal(con);
 }
-
+defineExpose({
+  handleAdd
+})
 </script>
 
 <template>
