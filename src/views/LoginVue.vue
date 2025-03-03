@@ -30,13 +30,20 @@ const registerLogin = () => {
       }
     })
     .catch((error) => {
-      console.error(error)
-      errorMsg.value = 'Internal error'
-      Error.code = 500
-      Error.msg = 'Internal server error. Please try again.'
-      router.push({
-        path: '/error'
-      })
+      //wrong login error
+      if (error.status == 400) {
+        console.log('here')
+        errorMsg.value = 'Username or password is incorrect.'
+      } else {
+        //other network errors
+        console.error(error)
+        errorMsg.value = 'Internal error'
+        Error.code = 500
+        Error.msg = 'Internal server error. Please try again.'
+        router.push({
+          path: '/error'
+        })
+      }
     })
 }
 
