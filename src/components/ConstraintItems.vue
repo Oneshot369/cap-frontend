@@ -71,9 +71,9 @@ defineExpose({
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  background-color: rgb(108, 117, 125);
+  background-color: #2c2f33; 
+  color: #f0f0f0;
   flex: 1;
-  color: black;
   font-size: large;
   padding: 23px;
   margin-bottom: 10px;
@@ -83,7 +83,12 @@ defineExpose({
   height: 75px;
 }
 .constraint:hover {
-  background-color: rgb(184, 190, 196);
+  background: radial-gradient(
+    circle at center,
+    rgba(4, 190, 66, 0.15) 10%,
+  rgba(44, 47, 51, 1) 80%
+  );
+  box-shadow: 0 0 10px rgba(4, 190, 66, 0.5);
   cursor: pointer;
 }
 .label {

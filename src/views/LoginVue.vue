@@ -11,11 +11,11 @@ const password = ref('')
 const errorMsg = ref('')
 
 const registerLogin = () => {
+  errorMsg.value = ''
   let loginAttempt = {
     username: email.value,
     password: password.value
   }
-  console.log(loginAttempt)
   axios
     .post(`${apiUrl}/api/v1/user/login`, loginAttempt)
     .then((response) => {
@@ -30,13 +30,17 @@ const registerLogin = () => {
       }
     })
     .catch((error) => {
-      console.error(error)
-      errorMsg.value = 'Internal error'
-      Error.code = 500
-      Error.msg = 'Internal server error. Please try again.'
-      router.push({
-        path: '/error'
-      })
+      if (error.response.status == 400) {
+        errorMsg.value = "Incorrect Username or password, please try again. "
+      } else {
+        console.error(error)
+        errorMsg.value = 'Internal error'
+        Error.code = 500
+        Error.msg = 'Internal server error. Please try again.'
+        router.push({
+          path: '/error'
+        })
+      }
     })
 }
 
@@ -72,7 +76,7 @@ onBeforeMount(() => {
       </div>
       <p v-if="errorMsg">Error: {{ errorMsg }}</p>
       <button submit class="btn btn-primary">Submit</button>
-      <p>Don't have an account? Click<a href="./register">HERE</a></p>
+      <p>Don't have an account? Click<a href="./register">Here</a></p>
     </form>
   </div>
 </template>

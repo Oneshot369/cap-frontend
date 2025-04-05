@@ -16,7 +16,7 @@ const logout = () => {
 <template>
   <h1 class="greeting">Logout</h1>
   <div class="greeting">
-    <h1>Sorry to see you go</h1>
+    <h3>Sorry to see you go</h3>
   </div>
   <div class="button-center">
     <button @click="logout" class="btn btn-primary">Logout</button>

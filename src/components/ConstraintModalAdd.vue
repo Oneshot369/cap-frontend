@@ -171,8 +171,8 @@ const addConstraint = () => {
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" @click="addConstraint">Send request</button>
-            <button class="btn btn-secondary" @click="closeModal">Close</button>
+            <button class="btn btn-primary" @click="addConstraint">Create Alert</button>
+            <!-- <button class="btn btn-secondary" @click="closeModal">Close</button> -->
           </div>
         </div>
       </div>

@@ -84,8 +84,7 @@ onBeforeMount(() => {
     </div>
     <div v-else>
       <h3>
-        Looks like you haven't saved a location yet. You can search for a location
-        <a href="/search">HERE</a>
+        Looks like you haven't saved a location yet. You can search for a location <a href="/search">here</a>
       </h3>
     </div>
   </div>

@@ -103,6 +103,7 @@ img {
 }
 nav {
   border-radius: 5px;
+  margin-top: 1rem;
 }
 .navbar-nav {
   justify-content: space-between;

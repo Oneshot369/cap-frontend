@@ -130,7 +130,7 @@ openModal
         <div class="modal-content bg-secondary">
           <div class="modal-header">
             <h5 class="modal-title">Edit Alert</h5>
-            <button type="button" class="btn-secondary btn-delete" @click="deleteConstraint">Delete</button>
+            <button type="button" class="btn-close" @click="closeModal"></button>
             
           </div>
           <div class="modal-body">
@@ -196,8 +196,8 @@ openModal
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary" @click="editConstraint">Send request</button>
-            <button class="btn btn-secondary" @click="closeModal">Close</button>
+            <button class="btn btn-primary" @click="editConstraint">Edit Alert</button>
+            <button class="btn btn-secondary" @click="deleteConstraint">Delete</button>
           </div>
         </div>
       </div>

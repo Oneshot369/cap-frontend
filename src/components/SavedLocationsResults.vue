@@ -43,18 +43,23 @@ const handleEditClick = (location: LocationObject) => {
 </template>
 
 <style scoped>
-.searches {
-  color: black;
-  background-color: rgb(108, 117, 125);
+.searches{
+  background-color: #2c2f33; 
+  color: #f0f0f0;
   margin: 10px;
   padding: 10px;
   min-width: 400px;
   border-radius: 10px;
   font-size: 25px;
+  
 }
-.searches:hover {
-  background-color: rgb(146, 155, 163);
-  box-shadow: 5px 5px 10px rgba(146, 155, 163, 0.7);
+.searches:hover{
+  background: radial-gradient(
+    circle at center,
+    rgba(4, 190, 66, 0.15) 0%,
+    #2c2f33 70%
+  );
+  box-shadow: 0 0 10px rgba(4, 190, 66, 0.5);
   cursor: pointer;
 }
 .container {

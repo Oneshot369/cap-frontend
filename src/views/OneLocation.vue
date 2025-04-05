@@ -125,7 +125,7 @@ function sendForecastRequest() {
           label: forecastResponse.city.name as string,
           data: dataList as number[],
           borderColor: '#04be42' as string,
-          backgroundColor: '#04be42' as string
+          backgroundColor: '#04be42' as string,
         }
       ]
     } as any
@@ -140,6 +140,9 @@ onBeforeMount(fetchData)
 
 <template>
   <div>
+    <div v-if="JWTcookie.cookie" class="save-button-container">
+      <button @click="saveLocationToAccount" class="btn btn-primary">Save Location</button>
+    </div>
     <div v-if="loading" class="greeting">
       <h1 class="green">Weather for...</h1>
     </div>
@@ -171,9 +174,7 @@ onBeforeMount(fetchData)
     <div class="graph">
       <ForecastGraph :weather="weatherData" />
     </div>
-    <div v-if="JWTcookie.cookie">
-      <button @click="saveLocationToAccount" class="btn btn-primary">Save Location</button>
-    </div>
+    
   </div>
 </template>
 
@@ -219,5 +220,11 @@ h1 {
   height: auto; 
   max-width: 100rem; 
   margin: 0 auto; 
+}
+.save-button-container {
+  display: flex;
+  justify-content: flex-end; 
+  padding-right: 20px;        
+  margin-top: 20px;          
 }
 </style>

@@ -23,32 +23,38 @@ var options = {
   plugins: {
     legend: {
       labels: {
-        color: 'black' // Set legend text color to black
+        color: 'white' // Set legend text color to black
       }
     },
     title: {
-      display: true,
+      display: false,
       text: 'Forecasted Temperature',
-      color: 'black' // Set title text color to black
+      color: 'rgba(255, 255, 255, 0.9)' // Set title text color to black
     }
   },
   scales: {
     x: {
       ticks: {
-        color: 'black' // Set x-axis tick labels to black
+        color: 'white' // Set x-axis tick labels to black
       },
       title: {
         display: true,
-        color: 'black' // Set x-axis title color to black (if any)
+        color: 'white' // Set x-axis title color to black (if any)
+      },
+      grid: {
+        color: 'rgba(255, 255, 255, 0.1)' 
       }
     },
     y: {
       ticks: {
-        color: 'black' // Set y-axis tick labels to black
+        color: 'white' // Set y-axis tick labels to black
       },
       title: {
         display: true,
-        color: 'black' // Set y-axis title color to black (if any)
+        color: 'white' // Set y-axis title color to black (if any)
+      },
+      grid: {
+        color: 'rgba(255, 255, 255, 0.1)' 
       }
     }
   }
@@ -69,8 +75,11 @@ var options = {
   width: 100%; /* Allow it to take up the full space provided by parent */
   max-width: 100%; /* Optional: set a max size for scaling */
 
-  background-color: #6c757d;
+  background-color: #2c2f33;
+  color: white;
   border-radius: 5px;
   margin-right: 10px;
+  box-shadow: 0 0 20px rgba(4, 190, 66, 0.4);
+  margin-bottom: 60px;   
 }
 </style>

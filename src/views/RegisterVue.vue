@@ -100,7 +100,7 @@ onBeforeMount(() => {
     </div>
     <p v-if="registerError">{{ registerError }}</p>
     <button type="submit" class="btn btn-primary">Submit</button>
-    <p>Already have and account? Click<a href="./login">HERE</a></p>
+    <p>Already have and account? Click<a href="./login">Here</a></p>
   </form>
 </template>
 
