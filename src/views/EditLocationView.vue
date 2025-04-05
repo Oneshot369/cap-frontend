@@ -17,7 +17,7 @@ let location = ref<LocationObject>({
   lat: 0,
   name: 'test'
 })
-let locationLength= ref<number>(0)
+let locationLength = ref<number>(0)
 
 const childRef = ref<InstanceType<typeof ConstraintItems> | null>(null)
 
@@ -37,8 +37,8 @@ const addedItem = (constraint: any) => {
         console.log('constraint', constraint)
         locations.forEach((loc: any) => {
           if (loc.id == location.value.id) {
-            location.value.constraints = loc.constraints;
-            didChange = true;
+            location.value.constraints = loc.constraints
+            didChange = true
             //update child constraints
             locationLength.value = 1
             childRef.value?.handleAdd(loc.constraints)
@@ -71,30 +71,32 @@ const pushBack = () => {
 }
 
 const deleteLocation = () => {
-  axios
-    .delete(`${apiUrl}/api/v1/user/deleteLocation?id=${location.value.id}`, {
-      headers: {
-        Authorization: 'Bearer ' + JWTcookie.cookie
-      }
-    })
-    .then((response) => {
-      if (response.status == 200) {
-        pushBack()
-      } else {
-        Error.code = response.status
-        Error.msg = response.data
+  if (confirm('Are you sure you want to delete the location?')) {
+    axios
+      .delete(`${apiUrl}/api/v1/user/deleteLocation?id=${location.value.id}`, {
+        headers: {
+          Authorization: 'Bearer ' + JWTcookie.cookie
+        }
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          pushBack()
+        } else {
+          Error.code = response.status
+          Error.msg = response.data
+          router.push({
+            path: `/error`
+          })
+        }
+      })
+      .catch((error) => {
+        Error.code = error.status
+        Error.msg = error.code
         router.push({
           path: `/error`
         })
-      }
-    })
-    .catch((error) => {
-      Error.code = error.status
-      Error.msg = error.code
-      router.push({
-        path: `/error`
       })
-    })
+  }
 }
 
 onBeforeMount(() => {

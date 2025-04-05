@@ -30,9 +30,12 @@ const registerLogin = () => {
       }
     })
     .catch((error) => {
-      if (error.response.status == 400) {
-        errorMsg.value = "Incorrect Username or password, please try again. "
+      //wrong login error
+      if (error.status == 400) {
+        console.log('here')
+        errorMsg.value = 'Username or password is incorrect.'
       } else {
+        //other network errors
         console.error(error)
         errorMsg.value = 'Internal error'
         Error.code = 500
