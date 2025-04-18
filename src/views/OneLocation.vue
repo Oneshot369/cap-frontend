@@ -15,6 +15,7 @@ import {
   LinearScale
 } from 'chart.js'
 import { JWTcookie } from '@/stores/cookie.js'
+import { adminCookie } from '@/stores/admin.js'
 
 // Get the current route
 const route = useRoute()
@@ -141,7 +142,9 @@ onBeforeMount(fetchData)
 <template>
   <div>
     <div v-if="JWTcookie.cookie" class="save-button-container">
-      <button @click="saveLocationToAccount" class="btn btn-primary">Save Location</button>
+      <div v-if="adminCookie.cookie == 'false'">
+        <button @click="saveLocationToAccount" class="btn btn-primary">Save Location</button>
+      </div>
     </div>
     <div v-if="loading" class="greeting">
       <h1 class="green">Weather for...</h1>

@@ -5,9 +5,11 @@ import router from '@/router'
 import Cookies from 'js-cookie'
 import { JWTcookie } from '@/stores/cookie'
 import { Error } from '@/stores/error'
+import { adminCookie } from '@/stores/admin'
 
 const logout = () => {
   JWTcookie.removeCookie()
+  adminCookie.removeCookie()
   router.push('/login')
 }
 

@@ -4,6 +4,7 @@ import axios from 'axios'
 import router from '@/router'
 import { JWTcookie } from '@/stores/cookie'
 import { Error } from '@/stores/error'
+import { adminCookie } from '@/stores/admin'
 
 const apiUrl = import.meta.env.VITE_SPRING_API_URL
 const email = ref('')
@@ -20,7 +21,8 @@ const registerLogin = () => {
     .post(`${apiUrl}/api/v1/user/login`, loginAttempt)
     .then((response) => {
       if (response.status == 200) {
-        JWTcookie.setCookie(response.data.data)
+        JWTcookie.setCookie(response.data.data.jwt)
+        adminCookie.setCookie(response.data.data.admin)
         errorMsg.value = ''
         router.push({
           path: '/'
