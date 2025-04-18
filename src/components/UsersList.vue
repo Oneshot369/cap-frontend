@@ -3,7 +3,7 @@ import { defineProps } from 'vue'
 import router from '@/router'
 import type { UserObject } from '@/stores/interface/userObject';
 
-defineProps<{
+const props = defineProps<{
   usersList: UserObject[]
 }>()
 
@@ -12,6 +12,7 @@ const handleClick = (user: UserObject) => {
     path: `/admin/user/${user.id}`
   })
 }
+console.log(props.usersList);
 </script>
 
 <!-- There are two errors here, but I have looking into them and they should not be happening, 
@@ -27,7 +28,7 @@ const handleClick = (user: UserObject) => {
       <h2>U-Name: {{ item.username }}</h2>
       <p>Age: {{ item.age }}</p>
       <p>Last Logon: {{ item.lastLogin }}</p>
-      <p>Locations #: {{ item.locations.length }}</p>
+      <p>Locations: {{ item.locations.length }}</p>
     </div>
   </div>
 </template>

@@ -24,6 +24,7 @@ const handleClick = (lat: number, lon: number) =>{
         <h2>Name: {{ item.name }}</h2>
         <p>Lat: {{ item.lat }}</p>
         <p>Lon: {{item.lon}}</p>
+        <p>Alerts: {{item.constraints.length}}</p>
       </div>
   </div>
 </template>

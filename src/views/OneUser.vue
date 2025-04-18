@@ -60,16 +60,53 @@ const getUser= () =>{
       loading.value = false
     })
 }
-
+const deleteUser= () =>{
+  axios
+    .delete(`${apiUrl}/api/v1/user/deleteUser?id=${userId}`, {
+      headers: {
+        Authorization: 'Bearer ' + JWTcookie.cookie
+      }
+    })
+    .then((response) => {
+      if (response.status == 200) {
+        router.push({
+          path: `/admin/users`
+        })
+      } else {
+        Error.code = response.status
+        Error.msg = response.data
+        router.push({
+          path: `/error`
+        })
+      }
+    })
+    .catch((error) => {
+      Error.code = error.status
+      Error.msg = error.code
+      router.push({
+        path: `/error`
+      })
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
+const pushBack = () => {
+  router.push({
+    path: `/admin/users`
+  })
+}
 onBeforeMount(getUser);
 </script>
 
 <template>
   <div>
+    <button class="btn btn-primary btn-padding" @click="pushBack()">Back</button>
     <div v-if="loading">
       <h1 class="green">Loading...</h1>
     </div>
     <div v-else>
+      
       <h1 class="green">User account: {{ user.username }}</h1>
       <div class="container">
         <div class="temp-text">
@@ -85,6 +122,9 @@ onBeforeMount(getUser);
       <div v-if="user.locations.length > 0">
       <h2>Here are the saved locations for the user:</h2>
       <UserSearchLocations :searchResults="user.locations" />
+    </div>
+    <div class="save-button-container">
+      <button @click="deleteUser" class="btn btn-secondary">Delete User</button>
     </div>
     </div>
   </div>
@@ -136,5 +176,8 @@ h2 {
   justify-content: flex-end; 
   padding-right: 20px;        
   margin-top: 20px;          
+}
+.btn-padding {
+  margin-left: 20px;
 }
 </style>
