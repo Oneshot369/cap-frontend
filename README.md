@@ -18,23 +18,23 @@ This is the frontend repository of my Weather app project that is interconnected
 
 ## Overview
 
-This is the frontend so all documentation will be related to the frontend. If you want to see the complete documentation for the front and backend, I suggest you visit my [project design document](https://1drv.ms/w/c/0f720a2bdf7ca902/Ect8zp6QuXVAjUKLloeDHOAB5pt0DCs30U6u0vzoaCLVQw?e=in1t7l) which holds the entirety of my documentation. This project is compleate and I have no outstanding issues. 
+This is the frontend so all documentation will be related to the frontend. If you want to see the complete documentation for the front and backend, I suggest you visit my [project design document](https://1drv.ms/w/c/0f720a2bdf7ca902/Ect8zp6QuXVAjUKLloeDHOAB5pt0DCs30U6u0vzoaCLVQw?e=in1t7l) which holds the entirety of my documentation. This project is complete and I have no outstanding issues. 
 
-This project is coded using VUE.js and is purly a frontend application. Meaning there is no buisness logic handled here (besides simple input form validation). All of its api calls go through the backend, and the backend handles the buisness logic. 
+This project is coded using VUE.js and is purely a frontend application. Meaning there is no business logic handled here (besides simple input form validation). All of its api calls go through the backend, and the backend handles the business logic. 
 
 ---
 
 ### Running the project
 
-To run this project, just make a fork and in the terminal use the command `npm run start` this starts the application in dev mode and runs it loccaly on your computer. You MUST be running the backend for this application to run properly. If you have not set the backend up yet, then you will need to start there first. 
+To run this project, just make a fork and in the terminal use the command `npm run start` this starts the application in dev mode and runs it locally on your computer. You MUST be running the backend for this application to run properly. If you have not set the backend up yet, then you will need to start there first. 
 
-In your .env and .env.dev folders you will need to point the `VITE_SPRING_API_URL` to your own backend url or the requests wont work. 
+In your .env and .env.dev folders you will need to point the `VITE_SPRING_API_URL` to your own backend url or the requests won't work. 
 
 ---
 
 ## Technologies
 
-These technologies are only for the frontend project, for the backend technologies please visit the backend reposiory. 
+These technologies are only for the frontend project, for the backend technologies please visit the backend repository. 
 
 | Name   | Justification | 
 |--------|---------------|
@@ -48,7 +48,7 @@ These technologies are only for the frontend project, for the backend technologi
 ---
 
 ## Requirements
-For this project I outlined 99 user stories for the requirements. As of 4/14/2025 they are all compleated with 181.5 work hours recorded to achieve all of them. For the entier list of them please visit the following document:
+For this project I outlined 99 user stories for the requirements. As of 4/14/2025 they are all completed with 181.5 work hours recorded to achieve all of them. For the entire list of them please visit the following document:
 
 [Sprint backlog](https://1drv.ms/x/c/0f720a2bdf7ca902/EWoqQukujrhBr4GsGu1vBuUBKRZgiGI2Cv-mG9eX-f13pQ?e=XyQx0b)
 
@@ -79,9 +79,12 @@ This image holds the wireframe to every single page in our frontend, to view thi
 
 #### Component design
 ![component image](https://github.com/Oneshot369/play-springboot-api/blob/main/Share%20pics/components.drawio.png?raw=true)
-This is the component design refrenced in the wireframe to view this image in more detail access it [HERE](https://github.com/Oneshot369/play-springboot-api/blob/main/Share%20pics/components.drawio.png)
+This is the component design referenced in the wireframe to view this image in more detail access it [HERE](https://github.com/Oneshot369/play-springboot-api/blob/main/Share%20pics/components.drawio.png)
 
 ## Backend
 To explore how this application interacts with its backend counterpart, view the backend repository [HERE](https://github.com/Oneshot369/play-springboot-api). 
 
 [Back to top](#table-of-contents)
+
+
+
