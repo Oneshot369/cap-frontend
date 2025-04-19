@@ -15,7 +15,7 @@ const handleClick = (user: UserObject) => {
 console.log(props.usersList);
 </script>
 
-<!-- There are two errors here, but I have looking into them and they should not be happening, 
+<!-- There is that error on key, but I have looking into it and it should not be happening, 
  not only that but they also work so IDK why the compiler is mad at them -->
 <template>
   <div class="container">

@@ -12,7 +12,15 @@ const apiUrl = import.meta.env.VITE_SPRING_API_URL
 
 const loading = ref(true)
 
-let users = ref<UserObject[]>([])
+let users = ref<UserObject[]>([]);
+let filterUsers = ref<UserObject[]>([]);
+let search = ref<string>("");
+
+// Method to search the list
+const filterAdmin = () => {
+  const query = search.value.trim().toLowerCase();
+  filterUsers.value = users.value.filter( user =>user.username.toLowerCase().includes(query))
+}
 
 const getUsers = () => {
   axios
@@ -24,6 +32,7 @@ const getUsers = () => {
     .then((response) => {
       if (response.status == 200) {
         users.value = response.data.data
+        filterUsers.value = response.data.data
       } else {
         Error.code = response.status
         Error.msg = response.data
@@ -65,8 +74,21 @@ onBeforeMount(() => {
     <div class="greeting">
       <h1 class="green">Admin View</h1>
     </div>
+    
     <h3>Here are the current users:</h3>
-      <UsersList :usersList="users"></UsersList>
+    <div class="input">
+    <label for="email" class="form-label">Search by Username:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        aria-describedby="emailHelp"
+        v-model="search"
+        @input="filterAdmin"
+        required
+      />
+    </div>
+      <UsersList :usersList="filterUsers"></UsersList>
     
   </div>
   
@@ -74,6 +96,11 @@ onBeforeMount(() => {
 
 <style lang="css" scoped>
 h3 {
+  text-align: center;
+}
+.input{
+  width:750px;
+  margin: 0 auto; /* centers the input div */
   text-align: center;
 }
 </style>
